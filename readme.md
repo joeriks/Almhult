@@ -2,10 +2,10 @@
 
 ###rest-interface
 
-/set/counter/132
-/get/counter
+	/set/counter/132
+	/get/counter
 
 ###signalr-interface
 
-set("counter",132)
-get("counter").done(function(result))
+	set("counter",132)
+	get("counter").done(function(result))

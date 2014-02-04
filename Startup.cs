@@ -16,7 +16,7 @@ namespace SignalrDataSelfHost
     {
         public void Configuration(IAppBuilder app)
         {
-            app.Map("/data", map =>
+            app.Map("/set", map =>
             {
                 map.UseHandlerAsync((req, res) =>
                 {
@@ -24,15 +24,29 @@ namespace SignalrDataSelfHost
                     if (split.Length == 3)
                     {
                         FnX.EsentKeyValue.GetStore().Set(split[1], split[2]);
+                        res.ContentType = "text/plain";
                         return res.WriteAsync("Set " + split[1] + ":" + split[2]);
                     }
-
                     res.ContentType = "text/plain";
-                    return res.WriteAsync("Hello, World!");
-
+                    return res.WriteAsync("Bad request");
                 });
-                map.UseCors(CorsOptions.AllowAll);
                 
+            });
+            app.Map("/get", map =>
+            {
+                map.UseHandlerAsync((req, res) =>
+                {
+                    var split = req.Path.Split('/');
+                    if (split.Length == 2)
+                    {
+                        var value = FnX.EsentKeyValue.GetStore().Get(split[1]);
+                        res.ContentType = "text/plain";
+                        return res.WriteAsync(value);
+                    }
+                    res.ContentType = "text/plain";
+                    return res.WriteAsync("Bad request");
+                });
+
             });
 
             app.Map("/signalr", map =>
