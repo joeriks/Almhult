@@ -16,52 +16,45 @@ namespace SignalrDataSelfHost
     {
         public void Configuration(IAppBuilder app)
         {
-            app.Map("/set", map =>
-            {
-                map.UseHandlerAsync((req, res) =>
-                {
-                    var split = req.Path.Split('/');
-                    if (split.Length == 3)
-                    {
-                        FnX.EsentKeyValue.GetStore().Set(split[1], split[2]);
-                        res.ContentType = "text/plain";
-                        return res.WriteAsync("Set " + split[1] + ":" + split[2]);
-                    }
-                    res.ContentType = "text/plain";
-                    return res.WriteAsync("Bad request");
-                });
-                
-            });
-            app.Map("/get", map =>
-            {
-                map.UseHandlerAsync((req, res) =>
-                {
-                    var split = req.Path.Split('/');
-                    if (split.Length == 2)
-                    {
-                        var value = FnX.EsentKeyValue.GetStore().Get(split[1]);
-                        res.ContentType = "text/plain";
-                        return res.WriteAsync(value);
-                    }
-                    res.ContentType = "text/plain";
-                    return res.WriteAsync("Bad request");
-                });
-
-            });
-
             app.Map("/signalr", map =>
             {
                 map.UseCors(CorsOptions.AllowAll);
                 var hubConfiguration = new HubConfiguration();                
                 map.RunSignalR(hubConfiguration);
             });
-                
+            
             string contentPath = Path.Combine(Environment.CurrentDirectory, @"..\..");
             var baseUrl = "";
             app.UseStaticFiles(new Microsoft.Owin.StaticFiles.StaticFileOptions()
             {
                 RequestPath = new PathString(baseUrl),
                 FileSystem = new PhysicalFileSystem(contentPath)
+            });
+            app.UseHandlerAsync((req, res) =>
+            {
+                var split = req.Path.Split('/'); // resource/key/value [POST]
+                if (split.Length == 4)
+                {
+                    var resource = split[1];
+                    var key = split[2];
+                    var value = split[3];                    
+                    FnX.EsentKeyValue.GetStore(resource).Set(key,value);
+                    FnX.EsentKeyValue.GetStore(resource).Dictionary.Flush();
+                    return res.WriteAsync("Set " + resource + " " + key + " " + value);
+
+                }
+                if (split.Length == 3)
+                {
+                    var resource = split[1]; // resource/key [GET] 
+                    var key = split[2];
+                    return res.WriteAsync(FnX.EsentKeyValue.GetStore(resource).Get(key));
+                }
+                if (split.Length == 2)
+                {
+                    var resource = split[1]; // resource [GET] 
+                    return res.WriteAsync(Newtonsoft.Json.JsonConvert.SerializeObject(FnX.EsentKeyValue.GetStore(resource).Dictionary));
+                }
+                return res.WriteAsync("Bad request");
             });
         }
     }
