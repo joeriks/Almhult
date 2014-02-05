@@ -111,7 +111,7 @@ namespace Almhult
                     {
                         using (var store = Storage.GetStore(resource))
                         {
-                            var result = store.GetAll(false);
+                            var result = store.GetAll();
                             await context.Response.WriteAsync(result);
                         }
                     }

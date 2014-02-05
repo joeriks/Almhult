@@ -89,7 +89,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Almhult.Owin.csproj">
+    <ProjectReference Include="..\Almhult.Owin\Almhult.Owin.csproj">
       <Project>{6021038f-3ed1-426b-b23a-60c736f0f5ce}</Project>
       <Name>Almhult.Owin</Name>
     </ProjectReference>

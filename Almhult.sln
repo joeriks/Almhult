@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Almhult.Owin", "Almhult.Owin.csproj", "{6021038F-3ED1-426B-B23A-60C736F0F5CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Almhult.Owin", "Almhult.Owin\Almhult.Owin.csproj", "{6021038F-3ED1-426B-B23A-60C736F0F5CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Almhult.Selfhost", "..\Almhult.Selfhost\Almhult.Selfhost.csproj", "{D41E15D3-9E92-4A4F-A49E-1C390D71A530}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Almhult.Selfhost", "Almhult.Selfhost\Almhult.Selfhost.csproj", "{D41E15D3-9E92-4A4F-A49E-1C390D71A530}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Almhult.AspNet", "Almhult.AspNet\Almhult.AspNet.csproj", "{2B37B291-5E15-43D2-8DC8-ECCCE75A4B12}"
 EndProject

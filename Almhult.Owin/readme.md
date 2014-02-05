@@ -63,8 +63,8 @@ Show older revision for individual item:
 	// void
 	clear()
 
-	// returns promise:
+	// returns promise
 	get(id) 
 	get(id, revision)
-	all()
-	all(true)
+	allGet() : gets all
+	allGet(true) : gets all, without id, date and rev info

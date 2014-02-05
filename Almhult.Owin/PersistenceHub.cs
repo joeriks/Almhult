@@ -7,18 +7,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EsentJsonStorage;
+using Newtonsoft.Json.Linq;
 
 namespace SignalrDataSelfHost
 {
     public class PersistenceHub : Hub
     {
-        public string Get(string key)
+        public object Get(string key)
         {
-            return Storage.GetStore().Get(key);
+            return JObject.Parse(Storage.GetStore().Get(key));
         }
-        public string Get(string key, int revision)
+        public object GetValue(string key)
         {
-            return Storage.GetStore().Get(key, revision);
+            var result = Storage.GetStore().GetValue(key);
+            try
+            {
+                return JObject.Parse(result);
+
+            }
+            catch (Exception)
+            {
+                return result;
+            }
+        }
+        public object Get(string key, int revision)
+        {
+            return JObject.Parse(Storage.GetStore().Get(key, revision));
         }
         public string Set(string id, object value)
         {
@@ -33,10 +47,6 @@ namespace SignalrDataSelfHost
         {
             return Set("", value);
         }
-        public string All()
-        {
-            return All(false);
-        }
         public void Clear()
         {
             using (var store = Storage.GetStore())
@@ -44,9 +54,9 @@ namespace SignalrDataSelfHost
                 store.Dictionary.Clear();
             }
         }
-        public string All(bool excludeSystemProperties)
+        public string GetAll()
         {
-            return Storage.GetStore().GetAll(excludeSystemProperties);
+            return Storage.GetStore().GetAll();
         }
     }
 }
