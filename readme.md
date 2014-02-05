@@ -65,6 +65,7 @@ Show older revision for individual item:
 
 	// returns promise
 	get(id) 
+	getValue(id) : gets only value (no id, date and rev info)
 	get(id, revision)
-	allGet() : gets all
-	allGet(true) : gets all, without id, date and rev info
+	getAll() : gets all
+	getAll(true) : gets all, without id, date and rev info
