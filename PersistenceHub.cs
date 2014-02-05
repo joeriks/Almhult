@@ -16,13 +16,37 @@ namespace SignalrDataSelfHost
         {
             return Storage.GetStore().Get(key);
         }
-        public string Set(string key, string value)
+        public string Get(string key, int revision)
         {
-            return Storage.GetStore().Set(key, value);
+            return Storage.GetStore().Get(key, revision);
         }
-        public IDictionary<string,string> All()
+        public string Set(string id, object value)
         {
-            return Storage.GetStore().GetAll<string>();
+            using (var store = Storage.GetStore())
+            {
+                var result = store.Set(id, value);
+                store.Dictionary.Flush();
+                return result;
+            }
+        }
+        public string Set(object value)
+        {
+            return Set("", value);
+        }
+        public string All()
+        {
+            return All(false);
+        }
+        public void Clear()
+        {
+            using (var store = Storage.GetStore())
+            {
+                store.Dictionary.Clear();
+            }
+        }
+        public string All(bool excludeSystemProperties)
+        {
+            return Storage.GetStore().GetAll(excludeSystemProperties);
         }
     }
 }

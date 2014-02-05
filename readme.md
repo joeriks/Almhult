@@ -52,9 +52,19 @@ Show older revision for individual item:
 	  "_rev": 2
 	}
 
-###signalr-interface (experimental)
+###signalr-interface
 
-	The idea is to create a SignalR-interface for the data aswell, for live collaboration on data items.
+	A SignalR-interface for the data, connect to it from the js console at localhost:8080/index.html
 
-	set("counter",132)
-	get("counter").done(function(result))
+	// returns new id
+	set(object)
+	set(id, object)
+	
+	// void
+	clear()
+
+	// returns promise:
+	get(id) 
+	get(id, revision)
+	all()
+	all(true)
