@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EsentJsonStorage;
 
 namespace SignalrDataSelfHost
 {
@@ -13,15 +14,15 @@ namespace SignalrDataSelfHost
     {
         public string Get(string key)
         {
-            return FnX.EsentKeyValue.GetStore().Get(key);
+            return Storage.GetStore().Get(key);
         }
-        public void Set(string key, object value)
+        public string Set(string key, string value)
         {
-            FnX.EsentKeyValue.GetStore().Set(key, value);
+            return Storage.GetStore().Set(key, value);
         }
         public IDictionary<string,string> All()
         {
-            return Persistence.All("default");
+            return Storage.GetStore().GetAll<string>();
         }
     }
 }
