@@ -28,7 +28,7 @@ Shows all items for a specific resource:
 	  "_id": "E8AEC37C3B4A4E0F83A61894C0E495FA"
 	}]
 
-	The resource has two stored items, the "BC" one is the 3nd revision with that id.
+	The resource has two stored items, the "BC" one is the 3rd revision with that id.
 
 Show individual item:
 
@@ -52,7 +52,9 @@ Show older revision for individual item:
 	  "_rev": 2
 	}
 
-###signalr-interface (expiremental)
+###signalr-interface (experimental)
+
+	The idea is to create a SignalR-interface for the data aswell, for live collaboration on data items.
 
 	set("counter",132)
 	get("counter").done(function(result))
