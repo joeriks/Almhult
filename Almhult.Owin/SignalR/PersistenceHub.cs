@@ -13,6 +13,11 @@ namespace SignalrDataSelfHost
 {
     public class PersistenceHub : Hub
     {
+        internal static void MessageAdd(string resource, string id, object value)
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<PersistenceHub>();
+            context.Clients.All.messageAdd(resource, id, value);
+        }
         public object Get(string key)
         {
             return JObject.Parse(Storage.GetStore().Get(key));

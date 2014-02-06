@@ -97,18 +97,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PersistenceHub.cs" />
+    <Compile Include="Storage\IPersistenceRestStorage.cs" />
+    <Compile Include="SignalR\PersistenceHub.cs" />
+    <Compile Include="Storage\PersistenceRestEsentJsonStorage.cs" />
+    <Compile Include="Owin\PersistenceRestMiddleware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SerializeForm.cs" />
+    <Compile Include="Owin\SerializeForm.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="readme.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="True\readme.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
