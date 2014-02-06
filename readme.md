@@ -1,15 +1,24 @@
-﻿##Basic idea
+﻿##Restful and SignalR interfaces for persistence of any json data - experimental
+
+For .net. Inspired by "Nobackend", CouchDb and Firebase. A hobby implementation useful for experimentation.
 
 Just run the solution from command line and you get a rest interface on localhost:8080 for any json data.
 
-The data stores as Json in Esent (the native windows data sln).
+Or go to /index.html to get a html page with a small signalr sample - and use the console from there.
 
-###Built in REST-interface
+Alternatively - run Almhult.AspNet or publish it to IIS.
+
+The data stores as Json in Esent (the native Windows data sln) - in App_Data folders (one per resource).
+
+No built in security ("admin-party" mode).
+
+###REST-interface
 
 	/{resource} : gets all items
 	/{resource}/{id} : gets one resource item
 	/{resource} (data) [post] : creates new item
 	/{resource}/{id} (data) [put] : updates item
+	/{resource} [delete] : deletes all items in resource collection
 
 ####Sample
 
