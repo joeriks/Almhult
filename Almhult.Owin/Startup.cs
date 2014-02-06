@@ -22,10 +22,10 @@ namespace Almhult
             app.Map("/signalr", map =>
             {
                 map.UseCors(CorsOptions.AllowAll);
-                var hubConfiguration = new HubConfiguration();                
+                var hubConfiguration = new HubConfiguration();
                 map.RunSignalR(hubConfiguration);
             });
-            
+
             string contentPath = Path.Combine(Environment.CurrentDirectory, @"..\..");
             var baseUrl = "";
             app.UseStaticFiles(new Microsoft.Owin.StaticFiles.StaticFileOptions()
@@ -35,7 +35,8 @@ namespace Almhult
             });
             app.Map("/rest", map =>
             {
-                map.UsePersistenceRest(new PersistenceRestMiddleware.PersistenceRestOptions {
+                map.UsePersistenceRest(new PersistenceRestMiddleware.PersistenceRestOptions
+                {
                     RestStorage = new PersistenceRestEsentJsonStorage()
                 });
             });

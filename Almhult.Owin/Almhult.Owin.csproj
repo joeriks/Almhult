@@ -35,6 +35,15 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Esent.Collections">
+      <HintPath>..\packages\ManagedEsent.1.9.0\lib\net40\Esent.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Esent.Interop">
+      <HintPath>..\packages\ManagedEsent.1.9.0\lib\net40\Esent.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="EsentJsonStorage">
+      <HintPath>..\packages\EsentJsonStorage.0.0.1.4-beta\lib\net45\EsentJsonStorage.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.0.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
@@ -75,6 +84,15 @@
     <Reference Include="Owin.Types">
       <HintPath>packages\Owin.Types.0.8.5\lib\net40\Owin.Types.dll</HintPath>
     </Reference>
+    <Reference Include="PersistenceRest.EsentJsonStorage">
+      <HintPath>..\packages\PersistenceRest.EsentJson.Owin.0.0.2-beta\lib\net45\PersistenceRest.EsentJsonStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="PersistenceRest.EsentJsonStorageHub">
+      <HintPath>..\packages\PersistenceRest.EsentJson.Owin.0.0.2-beta\lib\net45\PersistenceRest.EsentJsonStorageHub.dll</HintPath>
+    </Reference>
+    <Reference Include="PersistenceRest.Owin">
+      <HintPath>..\packages\PersistenceRest.EsentJson.Owin.0.0.2-beta\lib\net45\PersistenceRest.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Cors">
@@ -94,21 +112,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PersistenceRest.EsentJsonStorageHub\PersistenceRest.EsentJsonStorageHub.csproj">
-      <Project>{8dfcbebb-117e-4eb5-a0b9-755a381c48aa}</Project>
-      <Name>PersistenceRest.EsentJsonStorageHub</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PersistenceRest.EsentJsonStorage\PersistenceRest.EsentJsonStorage.csproj">
-      <Project>{1534234c-2748-4b16-849a-8e80da0edae8}</Project>
-      <Name>PersistenceRest.EsentJsonStorage</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PersistenceRest.Owin\PersistenceRest.Owin.csproj">
-      <Project>{39aa8882-8885-4a44-bb5b-0008f605c7eb}</Project>
-      <Name>PersistenceRest.Owin</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
