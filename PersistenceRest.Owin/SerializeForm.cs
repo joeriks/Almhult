@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Almhult
+namespace PersistenceRest
 {
     public static class SerializeForm
     {

@@ -1,5 +1,4 @@
-﻿using EsentJsonStorage;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Almhult
+namespace PersistenceRest
 {
     public static class PersistenceRestMiddlewareEstensions
     {
@@ -24,11 +23,10 @@ namespace Almhult
         public class PersistenceRestOptions
         {
             public string AccessControlAllowOrigin { get; set; }
-            internal IPersistenceRestStorage RestStorage { get; set; }
+            public IPersistenceRestStorage RestStorage { get; set; }
             public PersistenceRestOptions()
             {
                 AccessControlAllowOrigin = "*";
-                RestStorage = new PersistenceRestEsentJsonStorage();
             }
         }
 

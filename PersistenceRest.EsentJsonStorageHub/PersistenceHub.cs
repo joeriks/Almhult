@@ -1,52 +1,47 @@
 ﻿using Microsoft.AspNet.SignalR;
-using Microsoft.Isam.Esent.Collections.Generic;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EsentJsonStorage;
 using Newtonsoft.Json.Linq;
 
-namespace SignalrDataSelfHost
+namespace PersistenceRest
 {
     public class PersistenceHub : Hub
     {
-        internal static void MessageAdd(string resource, string id, object value)
+        private const string resource = "default";
+        private PersistenceRest.PersistenceRestEsentJsonStorage storage = new PersistenceRestEsentJsonStorage();
+
+        public static void MessageAdd(string resource, string id, object value)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<PersistenceHub>();
             context.Clients.All.messageAdd(resource, id, value);
         }
-        public object Get(string key)
+        public object Get(string id)
         {
-            return JObject.Parse(Storage.GetStore().Get(key));
+            return storage.Get(resource, id, 0, true);
         }
-        public object GetValue(string key)
+        public object GetValue(string id)
         {
-            var result = Storage.GetStore().GetValue(key);
+            var result = storage.Get(resource, id, 0, true);
             try
             {
                 return JObject.Parse(result);
-
             }
             catch (Exception)
             {
                 return result;
             }
         }
-        public object Get(string key, int revision)
+        public object Get(string id, int revision)
         {
-            return JObject.Parse(Storage.GetStore().Get(key, revision));
+            return JObject.Parse(storage.Get(resource, id, revision));
         }
         public string Set(string id, object value)
         {
-            using (var store = Storage.GetStore())
-            {
-                var result = store.Set(id, value);
-                store.Dictionary.Flush();
-                return result;
-            }
+            return storage.Put(resource, id, value);
         }
         public string Set(object value)
         {
@@ -54,14 +49,11 @@ namespace SignalrDataSelfHost
         }
         public void Clear()
         {
-            using (var store = Storage.GetStore())
-            {
-                store.Dictionary.Clear();
-            }
+            storage.Delete(resource);
         }
         public string GetAll()
         {
-            return Storage.GetStore().GetAll();
+            return storage.Get(resource);
         }
     }
 }
