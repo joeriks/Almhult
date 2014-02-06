@@ -12,6 +12,8 @@ The data stores as Json in Esent (the native Windows data sln) - in App_Data fol
 
 No built in security ("admin-party" mode).
 
+The main functionality is in https://github.com/joeriks/PersistenceRest (nuget PersistenceRest.EsentJson.Owin).
+
 ###REST-interface
 
 	/{resource} : gets all items
